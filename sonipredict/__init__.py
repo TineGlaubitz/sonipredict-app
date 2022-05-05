@@ -7,30 +7,30 @@ import joblib
 THIS_DIR = os.path.dirname(os.path.realpath(__file__))
 
 
-DF = pd.read_pickle(os.path.join(THIS_DIR, "preprocessed_data_w_projected"))
+DF = pd.read_pickle(os.path.join(THIS_DIR, "data_for_app"))
 
-continuos_features = [
-    "Size PP [nm]",
-    "Concentration [mg/mL]",
-    "Energy Density [J/mL]",
-    "abs_zeta",
-    "iep_stability",
-    "BET [m2/g]",
-    "Isoelectric Point",
-    "Zeta Pot[mV]",
-]
-cat_features = ["Coating"]
+META_ANALYSIS_MODEL = {
+    "continuos_features": [
+        "Size PP [nm]",
+        "Concentration [mg/mL]",
+        "Energy Density [J/mL]",
+        "Isoelectric Point",
+        "Zeta Pot[mV]",
+        "Volume [mL]",
+        "Total Energy [J]",
+    ],
+    "cat_features": ["Coating", "Particle"],
+}
+
 target = ["log_z_av"]
 
-all_features = continuos_features + cat_features
-
-FEATURES = continuos_features + cat_features
+FEATURES = (
+    META_ANALYSIS_MODEL["continuos_features"] + META_ANALYSIS_MODEL["cat_features"]
+)
 
 DF = DF.drop_duplicates(subset=FEATURES)
 
-ESTIMATORS = joblib.load(
-    os.path.join(THIS_DIR, "20210501_ensemble_wo_type_w_coating_w_pp.joblib")
-)
-isomap_REDUCER = joblib.load(os.path.join(THIS_DIR, "isomap_reducer.joblib"))
-PCA_REDUCER = joblib.load(os.path.join(THIS_DIR, "pca_reducer.joblib"))
+ESTIMATORS = joblib.load(os.path.join(THIS_DIR, "model"))
+isomap_REDUCER = joblib.load(os.path.join(THIS_DIR, "isomap"))
+PCA_REDUCER = joblib.load(os.path.join(THIS_DIR, "pca"))
 SCALER = ESTIMATORS[0].steps[0][1]

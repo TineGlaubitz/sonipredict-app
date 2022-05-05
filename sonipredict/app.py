@@ -32,14 +32,14 @@ dash_app.title = "sonipredict"
 
 DEFAULTS = {
     "size": 60,
-    "concentration": 5,
-    "volume": 5,
-    "energy_density": 500,
+    "concentration": 3.6,
+    "volume": 5.2,
+    "energy_density": 2000,
+    "energy": 4347,
     "ed_range": 1000,
     "ed_points": 20,
-    "bet": 100,
-    "iep": 2,
-    "zeta": -40,
+    "iep": 2.5,
+    "zeta": -26,
     "coating": "Hydrophil",
     "particle_type": "SiO2",
 }
@@ -70,7 +70,7 @@ layout = html.Div(
                         dbc.Col(
                             html.Div(
                                 [
-                                    dbc.FormGroup(
+                                    dbc.Col(
                                         [
                                             html.Label("particle size / nm"),
                                             dcc.Slider(
@@ -92,7 +92,7 @@ layout = html.Div(
                         dbc.Col(
                             html.Div(
                                 [
-                                    dbc.FormGroup(
+                                    dbc.Col(
                                         [
                                             html.Label("concentration / mg/mL"),
                                             dcc.Slider(
@@ -118,7 +118,7 @@ layout = html.Div(
                         dbc.Col(
                             html.Div(
                                 [
-                                    dbc.FormGroup(
+                                    dbc.Col(
                                         [
                                             html.Label("isoelectric point"),
                                             dcc.Slider(
@@ -140,7 +140,7 @@ layout = html.Div(
                         dbc.Col(
                             html.Div(
                                 [
-                                    dbc.FormGroup(
+                                    dbc.Col(
                                         [
                                             html.Label("energy density / J/mL"),
                                             dcc.Slider(
@@ -166,7 +166,7 @@ layout = html.Div(
                         dbc.Col(
                             html.Div(
                                 [
-                                    dbc.FormGroup(
+                                    dbc.Col(
                                         [
                                             html.Label("zeta potential / mV"),
                                             dcc.Slider(
@@ -192,15 +192,15 @@ layout = html.Div(
                         dbc.Col(
                             html.Div(
                                 [
-                                    dbc.FormGroup(
+                                    dbc.Col(
                                         [
-                                            html.Label("BET surface area"),
+                                            html.Label("total energy / J"),
                                             dcc.Slider(
-                                                id="bet",
+                                                id="energy",
                                                 min=0,
-                                                max=500,
+                                                max=5000,
                                                 step=0.5,
-                                                value=DEFAULTS["bet"],
+                                                value=DEFAULTS["energy"],
                                                 marks={
                                                     i: "{}".format(i)
                                                     for i in [
@@ -221,7 +221,7 @@ layout = html.Div(
                         dbc.Col(
                             html.Div(
                                 [
-                                    dbc.FormGroup(
+                                    dbc.Col(
                                         [
                                             html.Label("coating"),
                                             dcc.Dropdown(
@@ -250,7 +250,7 @@ layout = html.Div(
                         dbc.Col(
                             html.Div(
                                 [
-                                    dbc.FormGroup(
+                                    dbc.Col(
                                         [
                                             html.Label("energy density range"),
                                             dcc.Slider(
@@ -272,7 +272,7 @@ layout = html.Div(
                         dbc.Col(
                             html.Div(
                                 [
-                                    dbc.FormGroup(
+                                    dbc.Col(
                                         [
                                             html.Label("number energy density points"),
                                             dcc.Slider(
@@ -350,14 +350,11 @@ layout = html.Div(
                 html.P(
                     "You should not trust the predictions of the model if the red dot (for the query point) is far from the gray points in the ISOMAP and PCA plot. This means that the parameters you entered are very different from the ones the model was trained on."
                 ),
-                html.P(
-                    "In the current implementation the model has no understanding of the chemistry as the particles types are encoded using one-hot encoding."
-                ),
             ],
             className="container",
         ),
         html.Hr(),
-        html.Footer("© 2021, Tine Glaubitz. Web app version {}".format(__version__)),
+        html.Footer("© 2022, Tine Glaubitz. Web app version {}".format(__version__)),
     ]
 )
 
@@ -377,7 +374,7 @@ dash_app.layout = layout
         Input("iep", "value"),
         Input("energy_density", "value"),
         Input("zeta", "value"),
-        Input("bet", "value"),
+        Input("energy", "value"),
         Input("coating", "value"),
         Input("ed_range", "value"),
         Input("ed_points", "value"),
@@ -389,31 +386,31 @@ def update_figure(
     iep,
     energy_density,
     zeta,
-    bet,
+    energy,
     coating,
     ed_range,
     ed_points,
 ):
-    #             "Size PP [nm]",
-    #     "Concentration [mg/mL]",
-    #     "Energy Density [J/mL]",
-    #     "abs_zeta",
-    #     "iep_stability",
-    #     "BET [m2/g]",
-    #     "Isoelectric Point",
-    #     "Zeta Pot[mV]",
-    #     COATING
+    # ['Size PP [nm]',
+    # 'Concentration [mg/mL]',
+    # 'Energy Density [J/mL]',
+    # 'Isoelectric Point',
+    # 'Zeta Pot[mV]',
+    # 'Volume [mL]',
+    # 'Total Energy [J]',
+    # 'Coating',
+    # 'Particle']
     values = np.array(
         [
             particle_size,
             concentration,
             energy_density,
-            np.abs(zeta),
-            np.abs(iep - 7),
-            bet,
             iep,
             zeta,
+            20,
+            energy,
             coating,
+            "SiO2",
         ]
     )
 
