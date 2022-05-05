@@ -23,3 +23,9 @@ By default, you'll be able to access the application at <http://localhost:8091>.
 ```bash
 ./run_docker.sh
 ```
+
+
+### Heroku deployment notes 
+
+- Deployed using the `Heroku-20 stack`
+- Directly pushed to the heroku git remote
