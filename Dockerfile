@@ -16,6 +16,7 @@ RUN pip install -r requirements.txt
 WORKDIR /home/sonipredict
 
 COPY sonipredict ./sonipredict
+COPY sonipredict/assets ./sonipredict/assets
 
 COPY logging.ini .
 
