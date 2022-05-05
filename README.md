@@ -1,6 +1,9 @@
+<p align="center">
+  <img src="https://github.com/TineGlaubitz/sonipredict/raw/main/docs/source/figs/logo.png" height="300">
+</p>
+
+
 # sonipredict web app 
-
-
 
 [Demo deployed on Heroku](https://sonipredict.herokuapp.com/).
 
