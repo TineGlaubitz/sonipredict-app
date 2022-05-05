@@ -1,4 +1,6 @@
-# sonipredict prototype
+# sonipredict web app 
+
+
 
 [Demo deployed on Heroku](https://sonipredict.herokuapp.com/).
 
