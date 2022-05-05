@@ -211,4 +211,6 @@ tags
 !.vscode/extensions.json
 *.code-workspace
 
+poetry.lock
+
 # End of https://www.toptal.com/developers/gitignore/api/vscode,macos,vim,python,jupyternotebooks
