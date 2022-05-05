@@ -151,7 +151,7 @@ layout = html.Div(
                                                 value=DEFAULTS["energy_density"],
                                                 marks={
                                                     i: "{}".format(i)
-                                                    for i in [100, 1_000, 5_000, 10_000]
+                                                    for i in [500, 1_000, 5_000, 10_000]
                                                 },
                                             ),
                                         ]
@@ -171,13 +171,13 @@ layout = html.Div(
                                             html.Label("zeta potential / mV"),
                                             dcc.Slider(
                                                 id="zeta",
-                                                min=-20,
-                                                max=20,
-                                                step=0.5,
+                                                min=-50,
+                                                max=50,
+                                                step=1,
                                                 value=DEFAULTS["zeta"],
                                                 marks={
                                                     i: "{}".format(i)
-                                                    for i in [-7, -4, -2, 0, 2, 4, 7]
+                                                    for i in [-50, -25, 0, 25, 50]
                                                 },
                                             ),
                                         ]
@@ -199,16 +199,13 @@ layout = html.Div(
                                                 id="energy",
                                                 min=0,
                                                 max=5000,
-                                                step=0.5,
+                                                step=500,
                                                 value=DEFAULTS["energy"],
                                                 marks={
                                                     i: "{}".format(i)
                                                     for i in [
                                                         0,
-                                                        100,
-                                                        200,
-                                                        300,
-                                                        400,
+                                                        2000,
                                                         5000,
                                                     ]
                                                 },
@@ -252,6 +249,85 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
+                                            html.Label("volume / mL"),
+                                            dcc.Slider(
+                                                id="volume",
+                                                min=0,
+                                                max=50,
+                                                step=5,
+                                                value=DEFAULTS["volume"],
+                                                marks={
+                                                    i: "{}".format(i)
+                                                    for i in [
+                                                        0,
+                                                        25,
+                                                        50,
+                                                    ]
+                                                },
+                                            ),
+                                        ]
+                                    )
+                                ]
+                            )
+                        ),
+                        dbc.Col(
+                            html.Div(
+                                [
+                                    dbc.Col(
+                                        [
+                                            html.Label("particle type"),
+                                            dcc.Dropdown(
+                                                options=[
+                                                    {
+                                                        "label": "silica",
+                                                        "value": "SiO2",
+                                                    },
+                                                    {
+                                                        "label": "titania",
+                                                        "value": "TiO2",
+                                                    },
+                                                    {
+                                                        "label": "cerium oxide",
+                                                        "value": "CeO2",
+                                                    },
+                                                    {
+                                                        "label": "zink oxide    ",
+                                                        "value": "ZnO",
+                                                    },
+                                                ],
+                                                value=DEFAULTS["particle_type"],
+                                                id="particle",
+                                            ),
+                                        ]
+                                    )
+                                ]
+                            )
+                        ),
+                    ]
+                ),
+            ],
+            className="container",
+        ),
+        html.Div(
+            [
+                html.Hr(),
+                html.H2("Prediction"),
+                html.P(id="prediction_str"),
+            ],
+            className="container",
+        ),
+        html.Div(
+            [
+                html.Hr(),
+                html.H2("Energy density dependence"),
+                html.P(),
+                dbc.Row(
+                    [
+                        dbc.Col(
+                            html.Div(
+                                [
+                                    dbc.Col(
+                                        [
                                             html.Label("energy density range"),
                                             dcc.Slider(
                                                 id="ed_range",
@@ -261,7 +337,7 @@ layout = html.Div(
                                                 value=DEFAULTS["ed_range"],
                                                 marks={
                                                     i: "{}".format(i)
-                                                    for i in [10, 100, 1_000, 10_000]
+                                                    for i in [100, 1_000, 10_000]
                                                 },
                                             ),
                                         ]
@@ -293,19 +369,6 @@ layout = html.Div(
                         ),
                     ]
                 ),
-            ],
-            className="container",
-        ),
-        html.Div(
-            [
-                html.H2("Prediction"),
-                html.P(id="prediction_str"),
-            ],
-            className="container",
-        ),
-        html.Div(
-            [
-                html.H2("Energy density dependence"),
                 html.P(
                     "The plot below show the particle size as function of the energy density."
                 ),
@@ -376,6 +439,8 @@ dash_app.layout = layout
         Input("zeta", "value"),
         Input("energy", "value"),
         Input("coating", "value"),
+        Input("volume", "value"),
+        Input("particle", "value"),
         Input("ed_range", "value"),
         Input("ed_points", "value"),
     ],
@@ -388,6 +453,8 @@ def update_figure(
     zeta,
     energy,
     coating,
+    volume,
+    particle_type,
     ed_range,
     ed_points,
 ):
@@ -407,10 +474,10 @@ def update_figure(
             energy_density,
             iep,
             zeta,
-            20,
+            volume,
             energy,
             coating,
-            "SiO2",
+            particle_type,
         ]
     )
 
