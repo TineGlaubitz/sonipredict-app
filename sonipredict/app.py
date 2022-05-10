@@ -72,7 +72,7 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
-                                            html.Label("particle size / nm"),
+                                            html.Label("Particle size / nm"),
                                             dcc.Slider(
                                                 id="size",
                                                 min=20,
@@ -94,7 +94,7 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
-                                            html.Label("concentration / mg/mL"),
+                                            html.Label("Concentration / mg/mL"),
                                             dcc.Slider(
                                                 id="concentration",
                                                 min=1,
@@ -120,7 +120,7 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
-                                            html.Label("isoelectric point"),
+                                            html.Label("Isoelectric point"),
                                             dcc.Slider(
                                                 id="iep",
                                                 min=1,
@@ -142,7 +142,7 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
-                                            html.Label("energy density / J/mL"),
+                                            html.Label("Energy density / J mL⁻¹"),
                                             dcc.Slider(
                                                 id="energy_density",
                                                 min=100,
@@ -168,7 +168,7 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
-                                            html.Label("zeta potential / mV"),
+                                            html.Label("Zeta potential / mV"),
                                             dcc.Slider(
                                                 id="zeta",
                                                 min=-50,
@@ -194,7 +194,7 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
-                                            html.Label("total energy / J"),
+                                            html.Label("Delivered energy / J"),
                                             dcc.Slider(
                                                 id="energy",
                                                 min=0,
@@ -220,7 +220,7 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
-                                            html.Label("coating"),
+                                            html.Label("Coating"),
                                             dcc.Dropdown(
                                                 options=[
                                                     {
@@ -249,7 +249,7 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
-                                            html.Label("volume / mL"),
+                                            html.Label("Volume / mL"),
                                             dcc.Slider(
                                                 id="volume",
                                                 min=0,
@@ -275,15 +275,15 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
-                                            html.Label("particle type"),
+                                            html.Label("Particle type"),
                                             dcc.Dropdown(
                                                 options=[
                                                     {
-                                                        "label": "silica",
+                                                        "label": "silicon dioxide",
                                                         "value": "SiO2",
                                                     },
                                                     {
-                                                        "label": "titania",
+                                                        "label": "titanium dioxide",
                                                         "value": "TiO2",
                                                     },
                                                     {
@@ -328,7 +328,7 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
-                                            html.Label("energy density range"),
+                                            html.Label("Energy density range"),
                                             dcc.Slider(
                                                 id="ed_range",
                                                 min=10,
@@ -350,7 +350,7 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
-                                            html.Label("number energy density points"),
+                                            html.Label("Number energy density points"),
                                             dcc.Slider(
                                                 id="ed_points",
                                                 min=5,
@@ -370,7 +370,7 @@ layout = html.Div(
                     ]
                 ),
                 html.P(
-                    "The plot below show the particle size as function of the energy density."
+                    "The plot below show the Z-average size as function of the energy density."
                 ),
                 dcc.Graph(id="ed_plot"),
             ],
