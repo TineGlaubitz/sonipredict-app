@@ -51,7 +51,7 @@ layout = html.Div(
             [
                 html.Img(src="assets/logo.svg", width="400px"),
                 html.P(
-                    "Predict the outcome of dispersion experiments.",
+                    "Predict the outcome of sonication experiments for nanoparticles.",
                     className="lead",
                 ),
             ],
