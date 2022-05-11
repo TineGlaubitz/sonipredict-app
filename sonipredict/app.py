@@ -405,7 +405,7 @@ layout = html.Div(
             [
                 html.H2("About"),
                 html.P(
-                    "This app can provide provide guidance in selecting the dispersion parameters for nanoparticles. The model that is currently deployed in this app was trained on data we obtained for silica nanoparticles synthesized in our lab, for which we estimated the size using dynamic light scattering. To this dataset we added data we found by mining the literature."
+                    "This app can provide provide guidance in selecting the ultrasonication parameters for nanoparticle redispersion. This web-application is accompanying the following manuscript: Glaubitz, C.; Rothen-Rutishauser, B.; Lattuada, M.; Balog, S.; Petri-Fink, A.: Designing the Ultrasonic Treatment of Nanoparticles via Machine Learning."
                 ),
                 html.P(
                     "The model is an ensemble of gradient boosting regressors that were trained with slighly different inputs and hence can be used as to stabilize the variance and reduce the uncertainty."
