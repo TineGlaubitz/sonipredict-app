@@ -224,11 +224,11 @@ layout = html.Div(
                                             dcc.Dropdown(
                                                 options=[
                                                     {
-                                                        "label": "hydrophylic",
+                                                        "label": "Hydrophylic",
                                                         "value": "Hydrophil",
                                                     },
                                                     {
-                                                        "label": "hydrophobic",
+                                                        "label": "Hydrophobic",
                                                         "value": "Hydrophob",
                                                     },
                                                 ],
@@ -279,19 +279,19 @@ layout = html.Div(
                                             dcc.Dropdown(
                                                 options=[
                                                     {
-                                                        "label": "silicon dioxide",
+                                                        "label": "Silicon dioxide",
                                                         "value": "SiO2",
                                                     },
                                                     {
-                                                        "label": "titanium dioxide",
+                                                        "label": "Titanium dioxide",
                                                         "value": "TiO2",
                                                     },
                                                     {
-                                                        "label": "cerium oxide",
+                                                        "label": "Cerium oxide",
                                                         "value": "CeO2",
                                                     },
                                                     {
-                                                        "label": "zink oxide    ",
+                                                        "label": "Zink oxide    ",
                                                         "value": "ZnO",
                                                     },
                                                 ],
