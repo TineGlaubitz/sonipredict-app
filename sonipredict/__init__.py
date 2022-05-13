@@ -31,6 +31,4 @@ FEATURES = (
 DF = DF.drop_duplicates(subset=FEATURES)
 
 ESTIMATORS = joblib.load(os.path.join(THIS_DIR, "model"))
-isomap_REDUCER = joblib.load(os.path.join(THIS_DIR, "isomap"))
-PCA_REDUCER = joblib.load(os.path.join(THIS_DIR, "pca"))
 SCALER = ESTIMATORS[0].steps[0][1]

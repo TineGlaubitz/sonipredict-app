@@ -378,40 +378,12 @@ layout = html.Div(
         ),
         html.Div(
             [
-                html.H2("Visualization of the input"),
-                html.P(
-                    [
-                        "The plot below shows a ",
-                        html.A("ISOMAP ", href="https://en.wikipedia.org/wiki/Isomap"),
-                        "projection of the training data of the model and where the query point lies in this space.",
-                    ]
-                ),
-                dcc.Graph(id="isomap"),
-                html.P(
-                    [
-                        "The plot below shows the training data of the model in the space of the first two ",
-                        html.A(
-                            "principal components ",
-                            href="https://en.wikipedia.org/wiki/Principal_component_analysis",
-                        ),
-                        "and where the query point lies in this space.",
-                    ]
-                ),
-                dcc.Graph(id="pca"),
-            ],
-            className="container",
-        ),
-        html.Div(
-            [
                 html.H2("About"),
                 html.P(
                     "This app can provide provide guidance in selecting the ultrasonication parameters for nanoparticle redispersion. This web-application is accompanying the following manuscript: Glaubitz, C.; Rothen-Rutishauser, B.; Lattuada, M.; Balog, S.; Petri-Fink, A.: Designing the Ultrasonic Treatment of Nanoparticles via Machine Learning."
                 ),
                 html.P(
                     "The model is an ensemble of gradient boosting regressors that were trained with slighly different inputs and hence can be used as to stabilize the variance and reduce the uncertainty."
-                ),
-                html.P(
-                    "You should not trust the predictions of the model if the red dot (for the query point) is far from the gray points in the ISOMAP and PCA plot. This means that the parameters you entered are very different from the ones the model was trained on."
                 ),
             ],
             className="container",
@@ -426,8 +398,6 @@ dash_app.layout = layout
 
 @dash_app.callback(
     [
-        Output("isomap", "figure"),
-        Output("pca", "figure"),
         Output("ed_plot", "figure"),
         Output("prediction_str", "children"),
     ],
@@ -483,11 +453,9 @@ def update_figure(
 
     df = pd.DataFrame([dict(zip(FEATURES, values))])
 
-    isomap = get_isomap_plot(df)
-    pca = get_pca_plot(df)
     prediction = make_prediction(df)
     ed_sweep = run_energy_sweep(df, float(ed_range), int(ed_points))
-    return isomap, pca, ed_sweep, prediction
+    return ed_sweep, prediction
 
 
 if __name__ == "__main__":

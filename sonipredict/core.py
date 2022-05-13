@@ -1,7 +1,7 @@
 import plotly.express as px
 import pandas as pd
 import numpy as np
-from . import FEATURES, DF, SCALER, ESTIMATORS, PCA_REDUCER, isomap_REDUCER
+from . import FEATURES, DF, SCALER, ESTIMATORS
 import os
 
 THIS_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -84,7 +84,10 @@ def get_isomap_plot(new_points=None):
         fig.update_layout(transition_duration=500)
 
     fig.update_layout(
-        {"plot_bgcolor": "rgba(0, 0, 0, 0)", "paper_bgcolor": "rgba(0, 0, 0, 0)",}
+        {
+            "plot_bgcolor": "rgba(0, 0, 0, 0)",
+            "paper_bgcolor": "rgba(0, 0, 0, 0)",
+        }
     )
 
     return fig
@@ -123,7 +126,10 @@ def get_pca_plot(new_points=None):
         fig.update_layout(transition_duration=500)
 
     fig.update_layout(
-        {"plot_bgcolor": "rgba(0, 0, 0, 0)", "paper_bgcolor": "rgba(0, 0, 0, 0)",}
+        {
+            "plot_bgcolor": "rgba(0, 0, 0, 0)",
+            "paper_bgcolor": "rgba(0, 0, 0, 0)",
+        }
     )
 
     return fig
@@ -132,7 +138,11 @@ def get_pca_plot(new_points=None):
 def run_energy_sweep(params, e_range, n_points):
     ed = float(params["Energy Density [J/mL]"].values[0])
 
-    energy_grid = np.linspace(ed - e_range / 2, ed + e_range / 2, n_points,)
+    energy_grid = np.linspace(
+        ed - e_range / 2,
+        ed + e_range / 2,
+        n_points,
+    )
     predictions = []
     for energy in energy_grid:
         params["Energy Density [J/mL]"] = energy
