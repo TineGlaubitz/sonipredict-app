@@ -94,7 +94,7 @@ layout = html.Div(
                                 [
                                     dbc.Col(
                                         [
-                                            html.Label("Concentration / mg/mL"),
+                                            html.Label("Concentration / mg mL⁻¹"),
                                             dcc.Slider(
                                                 id="concentration",
                                                 min=1,
@@ -429,8 +429,8 @@ def update_figure(
     ed_points,
 ):
     # ['Size PP [nm]',
-    # 'Concentration [mg/mL]',
-    # 'Energy Density [J/mL]',
+    # 'Concentration [mg mL⁻¹]',
+    # 'Energy Density [J mL⁻¹]',
     # 'Isoelectric Point',
     # 'Zeta Pot[mV]',
     # 'Volume [mL]',
