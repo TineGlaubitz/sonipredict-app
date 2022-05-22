@@ -158,7 +158,7 @@ def run_energy_sweep(params, e_range, n_points):
         y="mean_prediction",
         error_y="std_prediction",
         labels={
-            "energy density": "energy density / mJ/mL",
+            "energy density": "energy density / mJ mL⁻¹",
             "mean_prediction": "size / nm",
         },
     )
