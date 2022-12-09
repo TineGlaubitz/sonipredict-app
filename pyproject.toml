@@ -15,7 +15,7 @@ pandas = "^1.2.4"
 xgboost = "^1.4.1"
 
 [tool.poetry.dev-dependencies]
-black = "^21.4b2"
+black = "^22.12"
 isort = "^5.8.0"
 
 [build-system]
